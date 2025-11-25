@@ -5,13 +5,14 @@ on:
   push:
     branches: [ "main" ]
 
-  # Allow manual trigger for prerelease from any PR
+  # Allow manual trigger for prerelease from any branch
   workflow_dispatch:
     inputs:
       ref:
-        description: 'Branch or PR ref to create prerelease from'
-        required: true
+        description: 'Branch or PR ref to create prerelease from (leave empty for main branch)'
+        required: false
         type: string
+        default: ''
 
 # The different jobs of this workflow need the following permissions
 permissions:
