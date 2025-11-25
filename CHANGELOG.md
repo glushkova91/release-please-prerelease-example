@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.0.0-rc.1](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.0.0-rc...v2.0.0-rc.1) (2025-11-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* breaking changes
+
+### Features
+
+* breaking changes ([fcc0f85](https://github.com/glushkova91/release-please-prerelease-example/commit/fcc0f85483fb9e3e4efcf510ee83539f704a7f60))
+* some changes ([16554ac](https://github.com/glushkova91/release-please-prerelease-example/commit/16554acc833dbc5bff7e564e2a12fc2386912025))
+* some changes ([3f33c63](https://github.com/glushkova91/release-please-prerelease-example/commit/3f33c6376489c5d7f1a8d49894f6a8213fa089aa))
+* some changes ([063da94](https://github.com/glushkova91/release-please-prerelease-example/commit/063da94e06c423991746575bf117aa6e40d9904f))
+
+
+### Bug Fixes
+
+* breaking changes ([4bc7395](https://github.com/glushkova91/release-please-prerelease-example/commit/4bc739511397927c502108fad3acaaeee3fcfbc0))
+
 ## [2.0.0-rc](https://github.com/glushkova91/release-please-prerelease-example/compare/v1.10.6...v2.0.0-rc) (2025-11-22)
 
 
