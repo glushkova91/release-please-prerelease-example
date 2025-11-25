@@ -5,6 +5,14 @@ on:
   push:
     branches: [ "main" ]
 
+  # Allow manual trigger for prerelease from any PR
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch or PR ref to create prerelease from'
+        required: true
+        type: string
+
 # The different jobs of this workflow need the following permissions
 permissions:
   contents: write
@@ -25,6 +33,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
 
       - name: Add labels to the repository if not present
         env:
@@ -40,11 +50,19 @@ jobs:
   prerelease-prep:
     name: Create Prerelease Pull Request
     runs-on: ubuntu-latest
+    # Only run prerelease when manually triggered OR when push to main
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
     needs: [ label-check ]
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+          fetch-depth: 0
+
       - id: release
         name: Run prerelease release-please
         uses: googleapis/release-please-action@v4.4.0
@@ -75,7 +93,15 @@ jobs:
         run: |
           echo "Running pre-release step!"
 
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+
       - name: Run release release-please
+        # Only create the final release PR when triggered from main branch (push event)
+        # Skip this step when manually triggered for a PR
+        if: ${{ github.event_name == 'push' }}
         uses: googleapis/release-please-action@v4.4.0
         with:
           config-file: ".github/release-config.json"
