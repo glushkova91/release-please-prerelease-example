@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0-rc.1](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.1.0-rc...v2.1.0-rc.1) (2025-11-25)
+
+
+### Features
+
+* some changes ([e33ea36](https://github.com/glushkova91/release-please-prerelease-example/commit/e33ea368d62c6d1068ffb95ab5d00993342caaf6))
+* some changes ([c55082b](https://github.com/glushkova91/release-please-prerelease-example/commit/c55082be4ba5249822fce34784574455a3cf1be9))
+
 ## [2.1.0-rc](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.0.0...v2.1.0-rc) (2025-11-25)
 
 
