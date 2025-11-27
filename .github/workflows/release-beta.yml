@@ -21,8 +21,8 @@ jobs:
         id: release
         with:
           target-branch: beta
-          config-file: ".github/prerelease-config.json"
-          manifest-file: ".github/prerelease-manifest.json"
+          config-file: prerelease-config.json
+          manifest-file: prerelease-manifest.json
           versioning-strategy: prerelease
 
   publish:
