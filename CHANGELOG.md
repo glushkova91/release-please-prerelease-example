@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0-rc.1](https://github.com/glushkova91/release-please-prerelease-example/compare/release-please-prerelease-example-v3.1.0-rc...release-please-prerelease-example-v3.1.0-rc.1) (2025-11-27)
+
+
+### Features
+
+* experiment with prerelease-config.json ([dc2af5d](https://github.com/glushkova91/release-please-prerelease-example/commit/dc2af5d1ff9d987b0dfbcc51be95777e6b7dd3a7))
+
 ## [3.1.0-rc](https://github.com/glushkova91/release-please-prerelease-example/compare/release-please-prerelease-example-v3.0.0...release-please-prerelease-example-v3.1.0-rc) (2025-11-27)
 
 
