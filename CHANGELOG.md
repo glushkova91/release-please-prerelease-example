@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.0-rc.2](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.1.0-rc.1...v2.1.0-rc.2) (2025-11-27)
+
+
+### Features
+
+* update config files ([44a9fa8](https://github.com/glushkova91/release-please-prerelease-example/commit/44a9fa81bc2e0670c1f7337f2cf4e2f56f23d479))
+* update smth in beta branch ([0449d37](https://github.com/glushkova91/release-please-prerelease-example/commit/0449d372c4c620284974a2314c489098398c50fa))
+* update the release flow ([50f0419](https://github.com/glushkova91/release-please-prerelease-example/commit/50f04191a4d7117f90828d8dd0159a9fc08251ed))
+
 ## [2.1.0-rc.1](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.1.0-rc...v2.1.0-rc.1) (2025-11-25)
 
 
