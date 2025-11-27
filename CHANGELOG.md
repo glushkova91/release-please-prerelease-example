@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.1.0](https://github.com/glushkova91/release-please-prerelease-example/compare/release-please-prerelease-example-v3.0.0...release-please-prerelease-example-v3.1.0) (2025-11-27)
+
+
+### Features
+
+* experiment with extra-files ([d1869bd](https://github.com/glushkova91/release-please-prerelease-example/commit/d1869bd28695039b25fd8975fe56bb760100ba05))
+
+
+### Miscellaneous Chores
+
+* **beta:** release release-please-prerelease-example 3.1.0-rc ([c3f0884](https://github.com/glushkova91/release-please-prerelease-example/commit/c3f0884003e61f780bd056dfda61cf11a32f0bf8))
+* **beta:** release release-please-prerelease-example 3.1.0-rc ([91658b1](https://github.com/glushkova91/release-please-prerelease-example/commit/91658b14d7e0878b989ba6624e4451f28682a56b))
+
 ## [3.1.0-rc](https://github.com/glushkova91/release-please-prerelease-example/compare/release-please-prerelease-example-v3.0.0...release-please-prerelease-example-v3.1.0-rc) (2025-11-27)
 
 
