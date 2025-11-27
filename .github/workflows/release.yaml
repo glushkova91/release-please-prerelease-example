@@ -122,8 +122,8 @@ jobs:
       - uses: googleapis/release-please-action@v4
         id: release
         with:
-          config-file: ".github/release-config.json"
-          manifest-file: ".github/release-manifest.json"
+          config-file: release-config.json
+          manifest-file: release-manifest.json
 
   publish:
     needs: release
