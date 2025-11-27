@@ -1,0 +1,19 @@
+{
+  "name": "release-please-prerelease-example",
+  "version": "2.1.0",
+  "description": "test",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glushkova91/release-please-prerelease-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glushkova91/release-please-prerelease-example/issues"
+  },
+  "homepage": "https://github.com/glushkova91/release-please-prerelease-example#readme"
+}
