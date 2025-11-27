@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0-rc](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.1.0...v2.2.0-rc) (2025-11-27)
+
+
+### Features
+
+* test package json ([b3eedb9](https://github.com/glushkova91/release-please-prerelease-example/commit/b3eedb993dbb036778ec0e8a23e6ffec7d2e7577))
+
 ## [2.1.0](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.0.0...v2.1.0) (2025-11-27)
 
 
