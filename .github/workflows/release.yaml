@@ -5,15 +5,6 @@ on:
   push:
     branches: [ "main" ]
 
-  # Allow manual trigger for prerelease from any branch
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: 'Branch or PR ref to create prerelease from (leave empty for main branch)'
-        required: false
-        type: string
-        default: ''
-
 # The different jobs of this workflow need the following permissions
 permissions:
   contents: write
@@ -25,127 +16,120 @@ permissions:
 concurrency:
   group: release
 
+#jobs:
+#  # This job creates the necessary labels for the release-please PRs:
+#  # https://github.com/googleapis/release-please-action/issues/1074
+#  label-check:
+#    name: Create release-please PR labels
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v5
+#
+#      - name: Add labels to the repository if not present
+#        env:
+#          GH_TOKEN: ${{ github.token }}
+#        run: |
+#          gh label create "autorelease: pending" -c FBCA04 -d "release-please PR tagging - Pending release" || true
+#          gh label create "autorelease: tagged" -c D4C5F9 -d "release-please PR tagging - Ready for release" || true
+#          gh label create "autorelease: snapshot" -c D4C5F9 -d "release-please PR tagging - Ready for release" || true
+#          gh label create "autorelease: published" -c 0E8A16 -d "release-please PR tagging - Released" || true
+#
+#  # This job creates or finalizes a prerelease pull request or finalizes a release pull request
+#  # and provides the necessary outputs for the subsequent jobs
+#  prerelease-prep:
+#    name: Create Prerelease Pull Request
+#    runs-on: ubuntu-latest
+#    needs: [ label-check ]
+#    outputs:
+#      releases_created: ${{ steps.release.outputs.releases_created }}
+#      tag_name: ${{ steps.release.outputs.tag_name }}
+#    steps:
+#      - id: release
+#        name: Run prerelease release-please
+#        uses: googleapis/release-please-action@v4.4.0
+#        with:
+#          config-file: ".github/prerelease-config.json"
+#          manifest-file: ".github/prerelease-manifest.json"
+#          #token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
+#
+#  # This job runs tests before the creation of the prerelease
+#  prerelease-test:
+#    name: Run Prerelease Tests
+#    runs-on: ubuntu-latest
+#    if: ${{ needs.prerelease-prep.outputs.releases_created == 'false' }}
+#    needs: [ prerelease-prep ]
+#    steps:
+#      - name: Release Build Push Deploy
+#        run: |
+#          echo "Prerelease Tests"
+#
+#  # This job runs creates the Prerelease and creates a subsequent Release Pull Request
+#  prerelease:
+#    name: Create Prerelease and Release Pull Request
+#    runs-on: ubuntu-latest
+#    if: ${{ needs.prerelease-prep.outputs.releases_created == 'true' && contains(needs.prerelease-prep.outputs.tag_name, 'rc') }}
+#    needs: [ prerelease-prep ]
+#    steps:
+#      - name: Pre Release Step
+#        run: |
+#          echo "Running pre-release step!"
+#
+#      - name: Run release release-please
+#        uses: googleapis/release-please-action@v4.4.0
+#        with:
+#          config-file: ".github/release-config.json"
+#          manifest-file: ".github/release-manifest.json"
+#          #token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
+#
+#  # This job runs post-prerelease steps
+#  post-prerelease:
+#    name: Post Prerelease Steps
+#    runs-on: ubuntu-latest
+#    needs: [ prerelease ]
+#    steps:
+#      - name: Post Prerelease Step
+#        run: |
+#          echo "Running post-prerelease steps!"
+#
+#  # This job creates the final release and Syncs the prerelease manifest
+#  release:
+#    name: Create Release
+#    runs-on: ubuntu-latest
+#    if: ${{ needs.prerelease-prep.outputs.releases_created == 'true' && !contains(needs.prerelease-prep.outputs.tag_name, 'rc') }}
+#    needs: [ prerelease-prep ]
+#    steps:
+#      - name: Release Step
+#        run: |
+#          echo "Running release step!"
+#
+#  # This job runs post-release steps
+#  post-release:
+#    name: Post Release Steps
+#    runs-on: ubuntu-latest
+#    needs: [ release ]
+#    steps:
+#      - name: Post Release Step
+#        run: |
+#          echo "Running post-release steps!"
+
 jobs:
-  # This job creates the necessary labels for the release-please PRs:
-  # https://github.com/googleapis/release-please-action/issues/1074
-  label-check:
-    name: Create release-please PR labels
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          ref: ${{ github.event.inputs.ref || github.ref }}
-
-      - name: Add labels to the repository if not present
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh label create "autorelease: pending" -c FBCA04 -d "release-please PR tagging - Pending release" || true
-          gh label create "autorelease: tagged" -c D4C5F9 -d "release-please PR tagging - Ready for release" || true
-          gh label create "autorelease: snapshot" -c D4C5F9 -d "release-please PR tagging - Ready for release" || true
-          gh label create "autorelease: published" -c 0E8A16 -d "release-please PR tagging - Released" || true
-
-  # This job creates or finalizes a prerelease pull request
-  # Only runs when manually triggered
-  prerelease-prep:
-    name: Create Prerelease Pull Request
-    runs-on: ubuntu-latest
-    # Only run prerelease when manually triggered
-    if: ${{ github.event_name == 'workflow_dispatch' }}
-    needs: [ label-check ]
-    outputs:
-      releases_created: ${{ steps.release.outputs.releases_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          ref: ${{ github.event.inputs.ref || github.ref }}
-          fetch-depth: 0
-
-      - id: release
-        name: Run prerelease release-please
-        uses: googleapis/release-please-action@v4.4.0
-        with:
-          config-file: ".github/prerelease-config.json"
-          manifest-file: ".github/prerelease-manifest.json"
-          #token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
-
-  # This job creates the final release pull request
-  # Runs automatically when pushing to main
-  release-prep:
-    name: Create Release Pull Request
-    runs-on: ubuntu-latest
-    # Only run release when automatically triggered by push to main
-    if: ${{ github.event_name == 'push' }}
-    needs: [ label-check ]
-    outputs:
-      releases_created: ${{ steps.release.outputs.releases_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - id: release
-        name: Run release release-please
-        uses: googleapis/release-please-action@v4.4.0
-        with:
-          config-file: ".github/release-config.json"
-          manifest-file: ".github/release-manifest.json"
-          #token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
-
-  # This job runs tests before the creation of the prerelease
-  prerelease-test:
-    name: Run Prerelease Tests
-    runs-on: ubuntu-latest
-    if: ${{ needs.prerelease-prep.outputs.releases_created == 'false' }}
-    needs: [ prerelease-prep ]
-    steps:
-      - name: Release Build Push Deploy
-        run: |
-          echo "Prerelease Tests"
-
-  # This job runs when the Prerelease PR is merged
-  prerelease:
-    name: Create Prerelease Release
-    runs-on: ubuntu-latest
-    if: ${{ needs.prerelease-prep.outputs.releases_created == 'true' && contains(needs.prerelease-prep.outputs.tag_name, 'rc') }}
-    needs: [ prerelease-prep ]
-    steps:
-      - name: Pre Release Step
-        run: |
-          echo "Running pre-release step for version ${{ needs.prerelease-prep.outputs.tag_name }}!"
-
-  # This job runs post-prerelease steps
-  post-prerelease:
-    name: Post Prerelease Steps
-    runs-on: ubuntu-latest
-    needs: [ prerelease ]
-    steps:
-      - name: Post Prerelease Step
-        run: |
-          echo "Running post-prerelease steps!"
-
-  # This job creates the final release when the release PR is merged
   release:
-    name: Create Release
     runs-on: ubuntu-latest
-    if: ${{ needs.release-prep.outputs.releases_created == 'true' }}
-    needs: [ release-prep ]
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
     steps:
-      - name: Release Step
-        run: |
-          echo "Running release step for version ${{ needs.release-prep.outputs.tag_name }}!"
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
 
-  # This job runs post-release steps
-  post-release:
-    name: Post Release Steps
-    runs-on: ubuntu-latest
-    needs: [ release ]
-    steps:
-      - name: Post Release Step
-        run: |
-          echo "Running post-release steps!"
+  publish:
+    needs: release
+    if: ${{ fromJSON(needs.release.outputs.releases_created) }}
+    uses: ./.github/workflows/build-and-publish.yml
+#    with:
+#      publish-script: "publish"
+#    secrets:
+#      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
