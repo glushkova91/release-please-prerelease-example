@@ -1,7 +1,7 @@
 {
   "release-type": "node",
   "prerelease": true,
-  "prerelease-type": "rc",
+  "prerelease-type": "test",
   "versioning": "prerelease",
   "changelog-sections": [
     { "type": "feat", "hidden": false, "section": "Features" },
