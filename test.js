@@ -4,6 +4,6 @@
     console.log("I just want to release it");
     console.log("I just want to release it 2");
     console.log("I just want to pre release it");
-    console.log("I just want to pre release it 2");
+    console.log("I just want to pre release it 23");
     console.log("Check git tag");
 })();
