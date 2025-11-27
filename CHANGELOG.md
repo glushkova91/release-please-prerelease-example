@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.1.0](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.0.0...v2.1.0) (2025-11-27)
+
+
+### Features
+
+* some changes ([e33ea36](https://github.com/glushkova91/release-please-prerelease-example/commit/e33ea368d62c6d1068ffb95ab5d00993342caaf6))
+* some changes ([c55082b](https://github.com/glushkova91/release-please-prerelease-example/commit/c55082be4ba5249822fce34784574455a3cf1be9))
+* some changes ([572f360](https://github.com/glushkova91/release-please-prerelease-example/commit/572f3602a1c051f744b696606febe1f15665e659))
+* some changes ([407291d](https://github.com/glushkova91/release-please-prerelease-example/commit/407291d5eb90e8b57151400d9306746f0936af19))
+* update config files ([44a9fa8](https://github.com/glushkova91/release-please-prerelease-example/commit/44a9fa81bc2e0670c1f7337f2cf4e2f56f23d479))
+* update smth in beta branch ([0449d37](https://github.com/glushkova91/release-please-prerelease-example/commit/0449d372c4c620284974a2314c489098398c50fa))
+* update the release flow ([50f0419](https://github.com/glushkova91/release-please-prerelease-example/commit/50f04191a4d7117f90828d8dd0159a9fc08251ed))
+
+
+### Miscellaneous Chores
+
+* **beta:** release 2.1.0-rc.2 ([21b1c30](https://github.com/glushkova91/release-please-prerelease-example/commit/21b1c30d511aa1ee8103f18aa1fed06788284659))
+* **beta:** release 2.1.0-rc.2 ([3685eb9](https://github.com/glushkova91/release-please-prerelease-example/commit/3685eb9f51a654197f1752fa88763b2faa3279be))
+* **main:** release 2.1.0-rc ([bcfb010](https://github.com/glushkova91/release-please-prerelease-example/commit/bcfb01040dce85e561ea936ca2864bc68b02ad1a))
+* **main:** release 2.1.0-rc ([39df30d](https://github.com/glushkova91/release-please-prerelease-example/commit/39df30d8db8ca0df7a6c5148c73887bb0bda2def))
+* **main:** release 2.1.0-rc.1 ([13416ff](https://github.com/glushkova91/release-please-prerelease-example/commit/13416ff93890ab2c05eeca94c7a2573f2fe57af8))
+* **main:** release 2.1.0-rc.1 ([eadc818](https://github.com/glushkova91/release-please-prerelease-example/commit/eadc818c00a3ac77f1843c0ff5c4acbfd3dcb7c6))
+
 ## [2.1.0-rc.2](https://github.com/glushkova91/release-please-prerelease-example/compare/v2.1.0-rc.1...v2.1.0-rc.2) (2025-11-27)
 
 
