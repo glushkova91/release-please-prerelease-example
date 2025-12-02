@@ -1,6 +1,14 @@
 {
-  "release-type": "node",
-  "prerelease": false,
+  "packages": {
+    "package-a": {
+      "release-type": "node",
+      "package-name": "@release-please-example/package-a"
+    },
+    "package-b": {
+      "release-type": "node",
+      "package-name": "@release-please-example/package-b"
+    }
+  },
   "changelog-sections": [
     { "type": "feat", "hidden": false, "section": "Features" },
     { "type": "fix", "hidden": false, "section": "Bug Fixes" },
@@ -8,17 +16,5 @@
     { "type": "chore", "hidden": false, "section": "Miscellaneous Chores" },
     { "type": "build", "hidden": false, "section": "Build System and Dependencies" },
     { "type": "docs", "hidden": false, "section": "Docs" }
-  ],
-  "packages": {
-    ".": {
-      "type": "generic",
-      "extra-files": [
-        {
-          "type": "json",
-          "path": "/prerelease-manifest.json",
-          "jsonpath": "$[\".\"]"
-        }
-      ]
-    }
-  }
+  ]
 }

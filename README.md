@@ -82,13 +82,65 @@ Each section can be customized by modifying the `changelog-sections` array in th
 
 You can add additional commit types, change section titles, or hide specific sections by setting `"hidden": true`. For more information on this, check the [Configuration File Reference](#Configuration-File-Reference) section.
 
+## Setup
+
+### Configure GitHub Environment (Required for Manual Approval)
+
+Before using the workflow, you need to create a GitHub Environment:
+
+1. Go to your repository **Settings**
+2. Click on **Environments** in the left sidebar
+3. Click **New environment**
+4. Name it: `prerelease-approval`
+5. Under **Deployment protection rules**, add:
+   - ✅ **Required reviewers**: Add yourself or your team members
+6. Click **Save protection rules**
+
+This enables the manual approval button for prereleases (similar to GitLab's manual jobs).
+
 ## Usage
 
-1. Push changes to the main branch with [Conventional Commits](https://www.conventionalcommits.org/)
-2. The workflow automatically creates a prerelease pull request
-3. When the prerelease PR is merged, a release candidate is created
-4. After testing, the workflow creates a final release pull request
-5. When the release PR is merged, the final release is created
+### Prerelease for Feature Branches (Label-Based)
+
+To create a prerelease for any PR/feature branch:
+
+1. Open your PR (e.g., `feature/my-feature`)
+2. Add the label **`create-prerelease`** to the PR
+3. The workflow automatically starts and creates a **prerelease PR** for that branch
+4. Merge the prerelease PR to create a release candidate for testing
+
+**Use case:** Test your feature branch changes with a real release candidate before merging to main!
+
+### Manual Prerelease (With Approval for Main Branch)
+
+When you push to main, the workflow runs automatically:
+
+1. Push changes to main with [Conventional Commits](https://www.conventionalcommits.org/)
+2. The workflow starts automatically
+3. **Prerelease job pauses** and shows "Waiting for approval"
+4. Click **"Review deployments"** button in the Actions tab
+5. Click **"Approve and deploy"** to create the prerelease, or **"Reject"** to skip it
+6. If approved, the workflow creates a **prerelease PR** with version like `1.10.7-rc.1`
+7. When you merge that prerelease PR, it creates a release candidate for testing
+
+**This is similar to GitLab's `when: manual` - the job appears in the pipeline but waits for you to click a button!**
+
+### Automatic Release PR
+
+When you push/merge to the main branch:
+
+1. Push changes to main with [Conventional Commits](https://www.conventionalcommits.org/)
+2. The workflow **automatically creates a release PR** with the next version (e.g., `1.10.7`)
+3. Review and merge the release PR
+4. The final release is created automatically
+
+### Both PRs Can Coexist
+
+You can have **both a prerelease PR and a release PR open at the same time**:
+- **Prerelease PR** (e.g., `1.10.7-rc.1`) - Created manually for testing
+- **Release PR** (e.g., `1.10.7`) - Created automatically when pushing to main
+
+This allows you to test with release candidates while continuing to prepare the final release.
 
 ## Implementation Details
 

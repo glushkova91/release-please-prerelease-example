@@ -1,0 +1,21 @@
+{
+  "extends": "semantic-release-monorepo",
+  "branches": [
+    {
+      "name": "feature/*",
+      "prerelease": "${name.replace(/^feature\\//g, '').replace(/[^a-z0-9]/g, '-')}"
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ],
+    "@semantic-release/git",
+    "@semantic-release/github"
+  ]
+}
