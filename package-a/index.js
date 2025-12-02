@@ -1,3 +1,3 @@
 export function greet() {
-  return 'Hello from Package A!';
+  return 'Hello from Package AA!';
 }
