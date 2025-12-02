@@ -1,0 +1,13 @@
+{
+  "name": "@release-please-example/package-b",
+  "version": "3.0.0",
+  "description": "Package B",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "echo 'Building package-b'",
+    "test": "echo 'Testing package-b'"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
